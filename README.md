@@ -1,6 +1,7 @@
-#📚 Sistema de Gestión de Biblioteca (Java MVC)
+# 📚 Sistema de Gestión de Biblioteca (Java MVC)
 Este proyecto es una aplicación de consola desarrollada en Java para la asignatura de Programación. El objetivo es gestionar de manera eficiente el inventario de una biblioteca, los registros de usuarios y el flujo de préstamos y devoluciones.
-#🛠️ Características Principales
+
+# 🛠️ Características Principales
 La aplicación permite realizar las siguientes acciones:
 
 Gestión de Inventario: Registro y búsqueda de libros por título e ISBN.
@@ -15,7 +16,7 @@ Validación de disponibilidad en tiempo real.
 
 Cálculo automático de fechas de vencimiento.
 
-#🏗️ Arquitectura del Proyecto (MVC)
+# 🏗️ Arquitectura del Proyecto (MVC)
 El código está organizado siguiendo el patrón de diseño Modelo-Vista-Controlador, lo que garantiza un código limpio, escalable y fácil de mantener:
 
 📂 biblioteca.model: Contiene las entidades de datos (Libro, Usuario, PrestamoLibro) y los Enums.
@@ -28,21 +29,21 @@ El código está organizado siguiendo el patrón de diseño Modelo-Vista-Control
 
 📂 biblioteca.app: Punto de entrada de la aplicación (Main).
 
-#🚀 Cómo ejecutar el programa
+# 🚀 Cómo ejecutar el programa
 1. Asegúrate de tener instalado el JDK 17 o superior.
 
 2. Clona este repositorio: git clone https://github.com/DanielFMdev/GestionBiblioteca.git
 
 3. Compila y ejecuta la clase Main.java desde tu IDE favorito (IntelliJ, Eclipse, VS Code).
 
-#💻 Tecnologías utilizadas
+# 💻 Tecnologías utilizadas
 Lenguaje: Java ☕
 
 Control de Versiones: Git & GitHub
 
 Arquitectura: Pattern MVC
 
-#👥 Desarrolladores
+# 👥 Desarrolladores
 Este proyecto ha sido desarrollado por:
 
 Daniel Flores Medina
