@@ -45,16 +45,89 @@ public class GestorBiblioteca {
         biblioteca.agregarPrestamo(nuevoPrestamo);
     }
 
+    // CORRECCIÓN: Método de devolución implementado
+    public void devolverPrestamo(int idUsuario, int isbn) throws LibroNoDisponibleException {
+        Usuario usuario = biblioteca.buscarUsuarioPorId(idUsuario);
+        Libro libro = biblioteca.buscarLibroPorISBN(isbn);
+
+        // Validamos que el usuario y el libro existan en el sistema
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o Libro no encontrados en el sistema.");
+        }
+
+        // Buscamos el préstamo activo del libro para el usuario
+        PrestamoLibro prestamoActivo = null;
+        for (PrestamoLibro p : usuario.getLibrosPrestados()) {
+            if (p.getLibro().getISBN() == isbn) {
+                prestamoActivo = p;
+                break;
+            }
+        }
+
+        // Si no se encuentra un préstamo activo, se lanza una excepción
+        if (prestamoActivo == null) {
+            throw new LibroNoDisponibleException(
+                    "El usuario " + usuario.getNombre() +
+                            " no tiene prestado el libro '" + libro.getTitulo() + "'.");
+        }
+
+        // Actualizamos la fecha de devolución y movemos el préstamo al historial
+        prestamoActivo.setFechaDevolucion(LocalDate.now());
+        usuario.getLibrosPrestados().remove(prestamoActivo);
+        usuario.getHistorialPrestamos().add(prestamoActivo);
+
+        // Actualizamos el número de copias del libro y su estado si es necesario
+        libro.setNumeroCopias(libro.getNumeroCopias() + 1);
+        if (libro.getEstado() == EstadoLibro.PRESTADO) {
+            libro.setEstado(EstadoLibro.DISPONIBLE);
+        }
+    }
+
     // Métodos delegados para que la Vista no hable con el Modelo directamente
     public void registrarUsuario(String nombre, String email) {
         biblioteca.agregarUsuario(new Usuario(nombre, email));
+    }
+
+    // Metodo para mostrar a los usuarios registrados
+    public void mostrarUsuarios() {
+        var usuarios = biblioteca.getUsuarios();
+        if (usuarios.isEmpty()) {
+            System.out.println("No hay usuarios registrados.");
+            return;
+        }
+        for (Usuario u : usuarios) {
+            System.out.println("ID: " + u.getId() + " | Nombre: " + u.getNombre() + " | Email: " + u.getEmail() +
+                    " | Libros prestados: " + u.getLibrosPrestados());
+        }
     }
 
     public void registrarLibro(int isbn, String titulo, String autor, int anio, Genero genero, int copias) {
         biblioteca.agregarLibro(new Libro(isbn, titulo, autor, anio, genero, copias));
     }
 
-    public Libro buscarLibro(String titulo) {
-        return biblioteca.buscarLibro(titulo);
+    public void mostrarLibros() {
+        var libros = biblioteca.getLibros();
+        if (libros.isEmpty()) {
+            System.out.println("No hay libros registrados.");
+            return;
+        }
+        for (Libro l : libros) {
+            System.out.println("Título: " + l.getTitulo() + " | Autor: " + l.getAutor() +
+                    " | Año de publicación: " + l.getAnioPublicacion() + " | Genero: " + l.getGenero() +
+                    " | Estado: "  + l.getEstado() + " | Copias: " + l.getNumeroCopias());
+        }
+    }
+
+    // Metodos para buscar los libros por ISBN, Titulo o Genero
+    public Libro buscarLibroPorTitulo(String titulo) {
+        return biblioteca.buscarLibroPorTitulo(titulo);
+    }
+
+    public Libro buscarLibroPorISBN(int isbn) {
+        return biblioteca.buscarLibroPorISBN(isbn);
+    }
+
+    public Libro buscarLibroPorGenero(String genero) {
+        return biblioteca.buscarLibroPorGenero(genero);
     }
 }

@@ -84,4 +84,11 @@ public class Libro {
     public void setNumeroCopias(int numeroCopias) {
         this.numeroCopias = numeroCopias;
     }
+
+    @Override
+    public String toString() {
+        return " | Titulo: " + getTitulo() + " | Autor: " + getAutor() + " | Genero: " + getGenero() +
+                " | Año de publicación: " + getAnioPublicacion() + " | Estado: " + getEstado() +
+                " | Copias: " + getNumeroCopias();
+    }
 }

@@ -55,4 +55,9 @@ public class PrestamoLibro {
     public void setFechaVencimiento(LocalDate fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
+
+    @Override
+    public String toString() {
+        return " | Libro: " + libro.getTitulo() + " | Prestado: " + fechaPrestamo + " | Vence: " + fechaVencimiento + "|";
+    }
 }

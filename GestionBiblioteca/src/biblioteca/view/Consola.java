@@ -20,9 +20,12 @@ public class Consola {
         do {
             System.out.println("\n--- BIENVENIDO A LA BIBLIOTECA ---");
             System.out.println("1 - Registrar Libro");
-            System.out.println("2 - Registrar Usuario");
-            System.out.println("3 - Realizar Préstamo");
-            System.out.println("4 - Buscar Libro");
+            System.out.println("2 - Listar Libros");
+            System.out.println("3 - Registrar Usuario");
+            System.out.println("4 - Listar Usuarios");
+            System.out.println("5 - Realizar Préstamo");
+            System.out.println("6 - Devolver Préstamo");
+            System.out.println("7 - Buscar Libro");
             System.out.println("0 - Salir");
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
@@ -33,12 +36,21 @@ public class Consola {
                     menuRegistrarLibro();
                     break;
                 case 2:
-                    menuRegistrarUsuario();
+                    menuMostrarLibro();
                     break;
                 case 3:
-                    menuRealizarPrestamo();
+                    menuRegistrarUsuario();
                     break;
                 case 4:
+                    menuMostrarUsuario();
+                    break;
+                case 5:
+                    menuRealizarPrestamo();
+                    break;
+                case 6:
+                    menuDevolverPrestamo();
+                    break;
+                case 7:
                     menuBuscarLibro();
                     break;
                 case 0:
@@ -59,6 +71,11 @@ public class Consola {
         System.out.println("Usuario registrado con éxito.");
     }
 
+    // Se añade un menú para mostrar a los usuarios
+    private void menuMostrarUsuario() {
+        gestor.mostrarUsuarios();
+    }
+
     private void menuRegistrarLibro() {
         System.out.print("ISBN: ");
         int isbn = sc.nextInt();
@@ -71,7 +88,7 @@ public class Consola {
         int anioPublicacion = sc.nextInt();
         sc.nextLine();
         System.out.print("Género (FICCION, NO_FICCION, CIENCIA_FICCION...): ");
-        Genero genero = Genero.valueOf(sc.next().toUpperCase());
+        Genero genero = Genero.valueOf(sc.nextLine().toUpperCase());
         System.out.print("Numero de copias: ");
         int numeroCopias = sc.nextInt();
         
@@ -79,11 +96,17 @@ public class Consola {
         System.out.println("Libro registrado con éxito.");
     }
 
+    private void menuMostrarLibro() {
+        gestor.mostrarLibros();
+    }
+
     private void menuRealizarPrestamo() {
         System.out.print("ID del Usuario: ");
         int idUsuario = sc.nextInt();
+        sc.nextLine();
         System.out.print("ISBN del Libro a prestar: ");
         int isbn = sc.nextInt();
+        sc.nextLine();
 
         try {
             gestor.realizarPrestamo(idUsuario, isbn);
@@ -93,15 +116,70 @@ public class Consola {
         }
     }
 
+    // Se corrige el método para devolver un préstamo, ahora se pide el ID del usuario y el ISBN del libro a devolver
+    private void menuDevolverPrestamo() {
+        System.out.print("ID del Usuario: ");
+        int idUsuario = sc.nextInt();
+        sc.nextLine();
+        System.out.print("ISBN del Libro a devolver: ");
+        int isbn = sc.nextInt();
+        sc.nextLine();
+
+        try {
+            gestor.devolverPrestamo(idUsuario, isbn);
+            System.out.println("Préstamo devuelto con éxito.");
+        } catch (LibroNoDisponibleException | IllegalArgumentException e) {
+            System.err.println("Error al devolver préstamo: " + e.getMessage());
+        }
+    }
+
+    // Se corrige las formas de buscar libro
     private void menuBuscarLibro() {
-        System.out.print("Ingrese el título del libro a buscar: ");
-        String titulo = sc.nextLine();
-        Libro libro = gestor.buscarLibro(titulo);
-        
-        if(libro != null) {
-            System.out.println("Encontrado: " + libro.getTitulo() + " | Autor: " + libro.getAutor() + " | Copias: " + libro.getNumeroCopias());
+        System.out.println("Como quiere buscar el libro: ");
+        System.out.println("1 - Titulo del libro");
+        System.out.println("2 - ISBN del libro");
+        System.out.println("3 - Genero del libro");
+        System.out.print("Ingrese una opcion: ");
+        int buscarLibro = sc.nextInt();
+        sc.nextLine();
+
+        if (buscarLibro == 1) {
+            System.out.print("Ingrese el título del libro a buscar: ");
+            String titulo = sc.nextLine();
+
+            Libro libro = gestor.buscarLibroPorTitulo(titulo);
+
+            if(libro != null) {
+                System.out.println("Encontrado: " + libro.getTitulo() + " | Autor: " + libro.getAutor() +
+                        " | Género: " + libro.getGenero() + " | Copias: " + libro.getNumeroCopias());
+            } else {
+                System.out.println("Libro no encontrado.");
+            }
+        } else if (buscarLibro == 2) {
+            System.out.print("Ingrese el ISBN del libro a buscar: ");
+            int isbn = sc.nextInt();
+            sc.nextLine();
+            Libro libro = gestor.buscarLibroPorISBN(isbn);
+
+            if(libro != null) {
+                System.out.println("Encontrado: " + libro.getTitulo() + " | Autor: " + libro.getAutor() +
+                        " | Género: " + libro.getGenero() + " | Copias: " + libro.getNumeroCopias());
+            } else {
+                System.out.println("Libro no encontrado.");
+            }
+        } else if (buscarLibro == 3) {
+            System.out.print("Ingrese el genero del libro a buscar: ");
+            String genero = sc.nextLine().toUpperCase();
+            Libro libro = gestor.buscarLibroPorGenero(genero);
+
+            if(libro != null) {
+                System.out.println("Encontrado: " + libro.getTitulo() + " | Autor: " + libro.getAutor() +
+                        " | Género: " + libro.getGenero() + " | Copias: " + libro.getNumeroCopias());
+            } else {
+                System.out.println("Libro no encontrado.");
+            }
         } else {
-            System.out.println("Libro no encontrado.");
+            System.out.println("Opción no permitida");
         }
     }
 }
