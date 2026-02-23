@@ -1,53 +1,66 @@
-# 📚 Sistema de Gestión de Biblioteca (Java MVC)
-Este proyecto es una aplicación de consola desarrollada en Java para la asignatura de Programación. El objetivo es gestionar de manera eficiente el inventario de una biblioteca, los registros de usuarios y el flujo de préstamos y devoluciones.
+#📚 Sistema de Gestión de Biblioteca (MVC Pro)
+Este proyecto es una solución integral para la gestión de una biblioteca, desarrollada en Java. Utiliza una arquitectura robusta basada en el patrón de diseño MVC (Modelo-Vista-Controlador) y un sistema de gestión de errores mediante excepciones personalizadas.
 
-# 🛠️ Características Principales
-La aplicación permite realizar las siguientes acciones:
+#🚀 Funcionalidades Actualizadas
+Gracias a la reciente expansión del sistema, el programa permite:
 
-Gestión de Inventario: Registro y búsqueda de libros por título e ISBN.
+Gestión de Usuarios: Registro y visualización completa del censo de socios.
 
-Control de Usuarios: Registro de socios con identificadores únicos.
+Inventario Dinámico: Registro de libros con control de copias físicas.
 
-Sistema de Préstamos: Lógica avanzada que permite controlar el stock de copias y límites de usuario.
+Sistema de Préstamos Inteligente: * Validación de disponibilidad de copias.
 
-Reglas de Negocio: * Límite de 3 libros por usuario.
+Límite de 3 libros por usuario.
 
-Validación de disponibilidad en tiempo real.
+Cálculo de fechas de vencimiento (30 días).
 
-Cálculo automático de fechas de vencimiento.
+Gestión de Devoluciones: Proceso de retorno de ejemplares para actualizar el stock.
 
-# 🏗️ Arquitectura del Proyecto (MVC)
-El código está organizado siguiendo el patrón de diseño Modelo-Vista-Controlador, lo que garantiza un código limpio, escalable y fácil de mantener:
+Búsquedas Avanzadas: Localización de ejemplares por Título, ISBN o Género.
 
-📂 biblioteca.model: Contiene las entidades de datos (Libro, Usuario, PrestamoLibro) y los Enums.
+#🏗️ Estructura del Proyecto
+El código se organiza en los siguientes paquetes para garantizar la separación de responsabilidades:
 
-📂 biblioteca.controller: El "cerebro" que aplica las reglas de negocio y comunica la vista con los datos.
+biblioteca.model: Contiene las entidades (Libro, Usuario, PrestamoLibro) y estados (EstadoLibro, Genero). Se encarga puramente de los datos.
 
-📂 biblioteca.view: Interfaz de usuario por consola para interactuar con el sistema.
+biblioteca.controller: Representado por GestorBiblioteca, gestiona la lógica de negocio y las validaciones.
 
-📂 biblioteca.exceptions: Excepciones personalizadas para un manejo de errores robusto.
+biblioteca.view: La clase Consola, que gestiona los menús y la interacción con el usuario.
 
-📂 biblioteca.app: Punto de entrada de la aplicación (Main).
+biblioteca.exceptions: Capa de seguridad que captura errores lógicos como el exceso de préstamos.
 
-# 🚀 Cómo ejecutar el programa
-1. Asegúrate de tener instalado el JDK 17 o superior.
+biblioteca.app: Clase Main que inicializa los componentes del sistema.
 
-2. Clona este repositorio: git clone https://github.com/DanielFMdev/GestionBiblioteca.git
+#🤝 Reparto de Trabajo (División de Tareas)
+Para este proyecto, el desarrollo se dividió estratégicamente entre los dos miembros del equipo:
 
-3. Compila y ejecuta la clase Main.java desde tu IDE favorito (IntelliJ, Eclipse, VS Code).
+👤 FabiTheo1 (Fabián González Olofsson)
+Arquitectura y Estructura: Migración del código inicial al patrón de diseño MVC.
 
-# 💻 Tecnologías utilizadas
-Lenguaje: Java ☕
+Capa de Excepciones: Creación y diseño de la lógica de excepciones personalizadas (LibroNoDisponibleException, LimitePrestamosExcedidoException).
 
-Control de Versiones: Git & GitHub
+Corrección de Modelos: Solución de errores críticos de inicialización en la clase Usuario y optimización de la clase Libro.
 
-Arquitectura: Pattern MVC
+Configuración de Entorno: Gestión del repositorio remoto en GitHub, organización de la estructura de paquetes y creación de la documentación técnica inicial.
 
-# 👥 Desarrolladores
-Este proyecto ha sido desarrollado por:
+👤 DanielFMdev (Daniel Flores Medina)
+Lógica de Negocio Extendida: Implementación del sistema de Devolución de Préstamos y actualización de stock en tiempo real.
 
-Daniel Flores Medina
-DanielFMdev - GitHub Profile
+Búsquedas Avanzadas: Desarrollo de los algoritmos de búsqueda por ISBN, Género y Título en el controlador.
 
-Fabián González Olofsson
-FabiTheo1 - GitHub Profile
+Mejora de la Interfaz (Consola): Diseño de los menús de visualización ("Listar Usuarios" y "Listar Libros") y el menú de selección de búsqueda.
+
+Refactorización del Controlador: Implementación de métodos para la extracción de listas de datos desde el modelo hacia la vista.
+
+#🛠️ Tecnologías Utilizadas
+Lenguaje: Java 17+
+
+Gestión de Fechas: java.time.LocalDate
+
+Colecciones: ArrayList para la gestión dinámica de datos.
+
+Versionado: Git & GitHub.
+
+📥 Ejecución
+Para ejecutar el proyecto, simplemente clona el repositorio y lanza la clase Main.java:
+git clone https://github.com/DanielFMdev/GestionBiblioteca.git
