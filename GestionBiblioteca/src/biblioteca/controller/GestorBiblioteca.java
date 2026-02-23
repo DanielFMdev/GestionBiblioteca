@@ -3,6 +3,7 @@ package biblioteca.controller;
 import biblioteca.model.*;
 import biblioteca.exceptions.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class GestorBiblioteca {
     private Biblioteca biblioteca;
@@ -90,7 +91,7 @@ public class GestorBiblioteca {
 
     // Metodo para mostrar a los usuarios registrados
     public void mostrarUsuarios() {
-        var usuarios = biblioteca.getUsuarios();
+        ArrayList<Usuario> usuarios = biblioteca.getUsuarios();
         if (usuarios.isEmpty()) {
             System.out.println("No hay usuarios registrados.");
             return;
@@ -105,8 +106,9 @@ public class GestorBiblioteca {
         biblioteca.agregarLibro(new Libro(isbn, titulo, autor, anio, genero, copias));
     }
 
+    // Metodo para mostrar los libros registrados
     public void mostrarLibros() {
-        var libros = biblioteca.getLibros();
+        ArrayList<Libro> libros = biblioteca.getLibros();
         if (libros.isEmpty()) {
             System.out.println("No hay libros registrados.");
             return;
