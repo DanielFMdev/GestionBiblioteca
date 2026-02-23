@@ -1,4 +1,4 @@
-# 📚 Sistema de Gestión de Biblioteca (MVC Pro)
+# 📚 Sistema de Gestión de Biblioteca
 Este proyecto es una solución integral para la gestión de una biblioteca, desarrollada en Java. Utiliza una arquitectura robusta basada en el patrón de diseño MVC (Modelo-Vista-Controlador) y un sistema de gestión de errores mediante excepciones personalizadas.
 
 # 🚀 Funcionalidades Actualizadas
