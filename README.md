@@ -1,7 +1,7 @@
-#📚 Sistema de Gestión de Biblioteca (MVC Pro)
+# 📚 Sistema de Gestión de Biblioteca (MVC Pro)
 Este proyecto es una solución integral para la gestión de una biblioteca, desarrollada en Java. Utiliza una arquitectura robusta basada en el patrón de diseño MVC (Modelo-Vista-Controlador) y un sistema de gestión de errores mediante excepciones personalizadas.
 
-#🚀 Funcionalidades Actualizadas
+# 🚀 Funcionalidades Actualizadas
 Gracias a la reciente expansión del sistema, el programa permite:
 
 Gestión de Usuarios: Registro y visualización completa del censo de socios.
@@ -18,7 +18,7 @@ Gestión de Devoluciones: Proceso de retorno de ejemplares para actualizar el st
 
 Búsquedas Avanzadas: Localización de ejemplares por Título, ISBN o Género.
 
-#🏗️ Estructura del Proyecto
+# 🏗️ Estructura del Proyecto
 El código se organiza en los siguientes paquetes para garantizar la separación de responsabilidades:
 
 biblioteca.model: Contiene las entidades (Libro, Usuario, PrestamoLibro) y estados (EstadoLibro, Genero). Se encarga puramente de los datos.
@@ -31,7 +31,7 @@ biblioteca.exceptions: Capa de seguridad que captura errores lógicos como el ex
 
 biblioteca.app: Clase Main que inicializa los componentes del sistema.
 
-#🤝 Reparto de Trabajo (División de Tareas)
+# 🤝 Reparto de Trabajo (División de Tareas)
 Para este proyecto, el desarrollo se dividió estratégicamente entre los dos miembros del equipo:
 
 👤 FabiTheo1 (Fabián González Olofsson)
@@ -52,7 +52,7 @@ Mejora de la Interfaz (Consola): Diseño de los menús de visualización ("Lista
 
 Refactorización del Controlador: Implementación de métodos para la extracción de listas de datos desde el modelo hacia la vista.
 
-#🛠️ Tecnologías Utilizadas
+# 🛠️ Tecnologías Utilizadas
 Lenguaje: Java 17+
 
 Gestión de Fechas: java.time.LocalDate
@@ -61,6 +61,6 @@ Colecciones: ArrayList para la gestión dinámica de datos.
 
 Versionado: Git & GitHub.
 
-📥 Ejecución
+# 📥 Ejecución
 Para ejecutar el proyecto, simplemente clona el repositorio y lanza la clase Main.java:
 git clone https://github.com/DanielFMdev/GestionBiblioteca.git
